@@ -53,6 +53,22 @@ const Mutation = {
 
     return { message: 'Goodbye' }
   },
+  createAffirmation: (parent, { text }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    return context.prisma.createAffirmation({
+      text: text,
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+    })
+  },
 }
 
 module.exports = {

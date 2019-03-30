@@ -3,6 +3,7 @@ import { Layer, Box, Text, Button } from "grommet"
 import { UserSettings, Close } from "grommet-icons"
 
 import Link from "../components/styles/Link"
+import Signout from "../containers/signout"
 
 export default function menu() {
   const [open, setOpen] = useState(false)
@@ -32,9 +33,13 @@ export default function menu() {
         >
           <Button icon={<Close />} onClick={handleClose} alignSelf="end" />
           <Box pad="medium" align="center">
+            <Link to={"/"}>
+              <Text>Home</Text>
+            </Link>
             <Link to={"/signin"}>
               <Text>Sign in</Text>
             </Link>
+            <Signout />
           </Box>
         </Layer>
       )}

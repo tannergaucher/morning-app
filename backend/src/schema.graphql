@@ -4,6 +4,11 @@ type SuccessMessage {
   message: String
 }
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 type Query {
   me: User
 }
@@ -15,13 +20,15 @@ type User {
   name: String
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
+type Affirmation {
+  id: ID!
+  text: String!
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String): AuthPayload!
   signin(email: String!, password: String!): AuthPayload!
   signout: SuccessMessage
+  createAffirmation(text: String!): Affirmation
+  deleteAffirmation(id: ID): Affirmation
 }

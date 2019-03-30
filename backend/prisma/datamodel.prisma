@@ -3,4 +3,11 @@ type User {
   email: String! @unique
   password: String!
   name: String
+  affirmations: [Affirmation]
+}
+
+type Affirmation {
+  id: ID! @unique
+  text: String!
+  user: User!
 }

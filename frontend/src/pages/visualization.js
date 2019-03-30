@@ -26,7 +26,7 @@ export default function visualization() {
   return (
     <Layout>
       <Content>
-        <MainText title="Visualization" subtitle="See it, then do it" />
+        <MainText title="Visualization" subtitle="See it, do it" />
         <Modal />
       </Content>
       <BackgroundImg fluid={image.childImageSharp.fluid} />

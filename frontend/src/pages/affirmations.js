@@ -9,6 +9,8 @@ import Nav from "../components/nav"
 import BackgroundImg from "../components/styles/BackgroundImage"
 import MainText from "../components/styles/mainText"
 
+import CreateAffirmation from "../containers/createAffirmation"
+
 export default function affirmations() {
   const { file: image } = useStaticQuery(
     graphql`
@@ -31,7 +33,8 @@ export default function affirmations() {
           title="Affirmations"
           subtitle="Read your list of affirmations"
         />
-        <Modal />
+        <ReadModal />
+        <CreateModal />
       </Content>
       <BackgroundImg fluid={image.childImageSharp.fluid} />
       <Nav previous="silence" next="visualization" />
@@ -39,7 +42,7 @@ export default function affirmations() {
   )
 }
 
-const Modal = () => {
+const ReadModal = () => {
   const [show, setShow] = useState(false)
   return (
     <Box>
@@ -60,6 +63,32 @@ const Modal = () => {
           <Box pad="medium">
             map affirmations here
             {/*  */}
+          </Box>
+        </Layer>
+      )}
+    </Box>
+  )
+}
+
+const CreateModal = () => {
+  const [show, setShow] = useState(false)
+  return (
+    <Box>
+      <Button
+        label="+ Affirmation"
+        onClick={() => setShow(true)}
+        alignSelf="center"
+        margin={{ vertical: "large" }}
+      />
+      {show && (
+        <Layer>
+          <Button
+            icon={<Close />}
+            onClick={() => setShow(false)}
+            alignSelf="end"
+          />
+          <Box pad="medium">
+            <CreateAffirmation />
           </Box>
         </Layer>
       )}

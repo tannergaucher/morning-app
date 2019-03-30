@@ -1,5 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import PageTransition from "gatsby-plugin-page-transitions"
 
 import Layout from "../components/layout"
 import Content from "../components/styles/Content"
@@ -27,15 +28,17 @@ export default function silence() {
   )
 
   return (
-    <Layout>
-      <Content>
-        <MainText
-          title="Silence"
-          subtitle="Take a moment to notice that you've woken up"
-        />
-      </Content>
-      <BackgroundImg fluid={image.childImageSharp.fluid} />
-      <Nav previous="" next="affirmations" />
-    </Layout>
+    <PageTransition>
+      <Layout>
+        <Content>
+          <MainText
+            title="Silence"
+            subtitle="Take a moment to notice that you've woken up"
+          />
+        </Content>
+        <BackgroundImg fluid={image.childImageSharp.fluid} />
+        <Nav previous="" next="affirmations" />
+      </Layout>
+    </PageTransition>
   )
 }
