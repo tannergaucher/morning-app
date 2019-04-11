@@ -1,11 +1,12 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import PageTransition from "gatsby-plugin-page-transitions"
 
 import Layout from "../components/layout"
 import Content from "../components/styles/Content"
 import Nav from "../components/nav"
 import BackgroundImg from "../components/styles/BackgroundImage"
-import MainText from "../components/styles/mainText"
+import Title from "../components/styles/Title"
 
 export default function writing() {
   const { file: image } = useStaticQuery(
@@ -23,12 +24,14 @@ export default function writing() {
   )
 
   return (
-    <Layout>
-      <Content>
-        <MainText title="Writing" subtitle="Make an entry in your journal" />
-      </Content>
-      <BackgroundImg fluid={image.childImageSharp.fluid} />
-      <Nav previous="visualization" next="reading" />
-    </Layout>
+    <PageTransition>
+      <Layout>
+        <Content>
+          <Title title="Writing" />
+        </Content>
+        <BackgroundImg fluid={image.childImageSharp.fluid} />
+        <Nav previous="visualization" next="reading" />
+      </Layout>
+    </PageTransition>
   )
 }

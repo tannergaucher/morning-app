@@ -1,15 +1,12 @@
-import React, { useState } from "react"
+import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Layer, Box, Button, Heading } from "grommet"
-import { Close } from "grommet-icons"
+import PageTransition from "gatsby-plugin-page-transitions"
 
 import Layout from "../components/layout"
 import Content from "../components/styles/Content"
 import Nav from "../components/nav"
 import BackgroundImg from "../components/styles/BackgroundImage"
-import MainText from "../components/styles/mainText"
-
-import CreateAffirmation from "../containers/createAffirmation"
+import Title from "../components/styles/Title"
 
 export default function affirmations() {
   const { file: image } = useStaticQuery(
@@ -27,71 +24,14 @@ export default function affirmations() {
   )
 
   return (
-    <Layout>
-      <Content>
-        <MainText
-          title="Affirmations"
-          subtitle="Read your list of affirmations"
-        />
-        <ReadModal />
-        <CreateModal />
-      </Content>
-      <BackgroundImg fluid={image.childImageSharp.fluid} />
-      <Nav previous="silence" next="visualization" />
-    </Layout>
-  )
-}
-
-const ReadModal = () => {
-  const [show, setShow] = useState(false)
-  return (
-    <Box>
-      <Button
-        label="Read Affirmations"
-        primary
-        onClick={() => setShow(true)}
-        alignSelf="center"
-        margin={{ vertical: "large" }}
-      />
-      {show && (
-        <Layer>
-          <Button
-            icon={<Close />}
-            onClick={() => setShow(false)}
-            alignSelf="end"
-          />
-          <Box pad="medium">
-            map affirmations here
-            {/*  */}
-          </Box>
-        </Layer>
-      )}
-    </Box>
-  )
-}
-
-const CreateModal = () => {
-  const [show, setShow] = useState(false)
-  return (
-    <Box>
-      <Button
-        label="+ Affirmation"
-        onClick={() => setShow(true)}
-        alignSelf="center"
-        margin={{ vertical: "large" }}
-      />
-      {show && (
-        <Layer>
-          <Button
-            icon={<Close />}
-            onClick={() => setShow(false)}
-            alignSelf="end"
-          />
-          <Box pad="medium">
-            <CreateAffirmation />
-          </Box>
-        </Layer>
-      )}
-    </Box>
+    <PageTransition>
+      <Layout>
+        <Content>
+          <Title title="Affirmations" />
+        </Content>
+        <BackgroundImg fluid={image.childImageSharp.fluid} />
+        <Nav previous="silence" next="visualization" />
+      </Layout>
+    </PageTransition>
   )
 }

@@ -18,6 +18,7 @@ type User {
   email: String!
   password: String!
   name: String
+  affirmations: [Affirmation]!
 }
 
 type Affirmation {

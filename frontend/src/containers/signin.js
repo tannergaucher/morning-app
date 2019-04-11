@@ -3,6 +3,9 @@ import { Box, Button, Form, FormField } from "grommet"
 import { Mutation } from "react-apollo"
 import gql from "graphql-tag"
 
+import CURRENT_USER_QUERY from "../graphql/queries/user"
+import { navigate } from "@reach/router"
+
 const SIGNIN_MUTATION = gql`
   mutation signin($email: String!, $password: String!) {
     signin(email: $email, password: $password) {
@@ -20,20 +23,30 @@ export default function signin() {
   const [password, setPassword] = useState("")
 
   return (
-    <Mutation mutation={SIGNIN_MUTATION} variables={{ email, password }}>
+    <Mutation
+      mutation={SIGNIN_MUTATION}
+      variables={{ email, password }}
+      refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+    >
       {(signin, { loading, error }) => (
-        <Box>
-          <Form messages={error}>
+        <Box align="center">
+          <Form
+            onSubmit={async e => {
+              e.preventDefault()
+              await signin()
+              navigate(`/`)
+            }}
+          >
             <FormField
               name="email"
-              label="email"
+              label="Email"
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
             <FormField
               name="password"
-              label="password"
+              label="Password"
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -41,8 +54,9 @@ export default function signin() {
             <Button
               type="submit"
               label="Sign In"
-              onClick={signin}
               disabled={loading}
+              margin={{ vertical: "medium" }}
+              fill={true}
             />
           </Form>
         </Box>

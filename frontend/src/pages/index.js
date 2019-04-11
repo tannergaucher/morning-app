@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import Content from "../components/styles/Content"
 import Nav from "../components/nav"
 import BackgroundImg from "../components/styles/BackgroundImage"
-import MainText from "../components/styles/mainText"
+import Title from "../components/styles/Title"
 
 export default function index() {
   const { file: image } = useStaticQuery(
@@ -30,7 +30,7 @@ export default function index() {
         keywords={[`miracle morning`, `productivity`, `progressive web app`]}
       />
       <Content>
-        <MainText title="Good Morning, Tanner" subtitle="Make today count" />
+        <Title title={`Good Morning.`} />
       </Content>
       <BackgroundImg
         fluid={image.childImageSharp.fluid}

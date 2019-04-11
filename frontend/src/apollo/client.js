@@ -18,6 +18,6 @@ export const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    test: true,
+    editing: [],
   },
 })
